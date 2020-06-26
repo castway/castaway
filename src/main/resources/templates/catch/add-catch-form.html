@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>Add Catch</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-image: url(../images/jumbotron-background-short.JPG);
+	background-size: cover;
+	height: 100%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.subtitle-jumbotron {
+	color: white;
+	text-align: center;
+}
+
+.add-catch-header {
+	margin: 50px;
+	color: #FA9A82;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.copyright, .footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+#label-species, #label-weight, #label-length, #label-date {
+	color: white;
+	margin-top:5px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/welcome}"> <img
+			src="../images/Logo.svg" width="30"
+			height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			CASTAWAY
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" th:href="@{/catch/catchList}">Home</a>
+				<a class="nav-item nav-link" href="#">About</a> <a
+					class="nav-item nav-link" th:href="@{/contact}">Contact</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<hr class="my-4">
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<h2 class="add-catch-header">ADD CATCH</h2>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-4"></div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-4">
+
+
+				<form action="#" th:action="@{/catch/save}" th:object="${catch}"
+					method="post">
+
+						<input type="hidden" th:field="*{id}">
+						 
+						<label id="label-species">Species</label> 
+							<select name="species" class="form-control">
+							<option hidden value="">Choose species</option>
+							<option th:each="speciesOpt : ${T(com.tomankiewicz.rafal.castawayspringboot.species.Fish).values()}" 
+								th:value="${speciesOpt}" th:text="${speciesOpt.displayValue}"></option>
+							</select>
+							<i class="text-danger" th:if="${#fields.hasErrors('species')}" th:errors="*{species}" value = "Choose species">species error</i> 
+							<br>
+							
+						<label id="label-length">Enter length [cm]</label> 
+							<input id="length" type="text" th:field="*{length}" th:placeholder="Length"
+									class="form-control"> 
+								<i class="text-danger" th:if="${#fields.hasErrors('length')}" th:errors="*{length}">length error</i> 
+								<br>
+								
+						<label id="label-weight">Enter weight [kg]</label> 
+							<input id="weigth" type="text" th:field="*{weigth}" th:placeholder="Weigth" class="form-control"> 
+								<i class="text-danger" th:if="${#fields.hasErrors('weigth')}" th:errors="*{weigth}">weigth error</i> 
+								<br>
+								
+						<label id="label-date">Date</label>
+							<input id="date" type="date" th:field="*{date}" th:placeholder="Date" class="form-control"> 
+								<i class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date error</i>
+								<p class="text-warning" id="wrong-date"></p> 
+							
+								<br><br>
+							
+					<button type="submit" class="btn btn-outline-light col text-center">Save</button>
+
+				</form>
+				<br> 
+				
+				<a th:href="@{/catch/catchList}" class="btn btn-outline-secondary col text-center">&larr; Back to catch list</a>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-lg-4"></div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class=container style="margin-top: 50px;">
+		<hr class="line-break">
+	</div>
+
+	<!-- Footer -->
+	<footer class="page-footer font-small purple pt-4">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway-springboot"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+	</footer>
+	<!-- Footer -->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+	
+	<script type="text/javascript">
+	
+    document.getElementById("date").onchange = function(){
+        
+        var today = Date.now();
+        var inputDate = document.getElementById("date").valueAsDate;
+        
+        if (inputDate > today){
+            document.getElementById("wrong-date").innerHTML = "Pick a date that is not in the future";
+        } else {
+            document.getElementById("wrong-date").innerHTML = "";
+        }
+    }
+    
+	
+	</script>
+</body>
+
+
+
+</html>

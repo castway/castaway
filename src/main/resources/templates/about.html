@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>About CASTAWAY</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-image: url(images/jumbotron-background-edited.jpg);
+	background-size: cover;
+	height: 80%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.lead {
+	color: white;
+}
+
+.subtitle-jumbotron {
+	color: white;
+	text-align: center;
+}
+
+.card {
+	border-width: 0px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.card-body {
+	background-image: url(images/card-background.jpg);
+	background-size: cover;
+	color: white;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.about-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1.3rem;
+	color: #FA9A82;
+}
+
+.fa-clipboard {
+	color: white;
+	size: 5x;
+}
+    
+.fa-hashtag {
+    margin-right: 1rem;
+
+    }    
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+.paragraph {
+    color: white; 
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+    }
+
+    .paragraph-sub {
+        color: white; 
+        padding-top: 0.5rem;
+        padding-left: 4rem;
+        padding-right: 5rem;
+        font-size: 1.2rem;
+    }
+#track-about, #compete-about, #analyze-about {
+    padding-left: 3rem;    
+    } 
+    
+ul {
+        list-style-type: none;
+        color: white;
+        
+    } 
+    
+.fa-dot-circle, .fa-circle {
+        margin-left: 0px;
+        margin-right: 1rem;
+        color: #FA9A82;
+}
+ 
+    .fa-dot-circle {
+            font-size: 0.8rem;
+
+    }
+    
+    .fa-circle {
+        font-size: 0.6rem;
+    }
+    
+    .credentials {
+        padding-left: 1rem;
+    }
+    
+</style>
+
+</head>
+
+<body>
+
+
+	<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/welcome}"> <img
+			src="images/Logo.svg" width="30"
+			height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			CASTAWAY
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" th:href="@{/welcome}">Home</a> 
+                <a class="nav-item nav-link active" href="#">About<span class="sr-only">(current)</span></a> 
+                <a class="nav-item nav-link" th:href="@{/contact}">Contact</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<h1 class="display-4">About CASTAWAY</h1>
+		<!-- <p class="lead">We are a web service dedicated to anglers of all kind</p> -->
+		<hr class="my-4">
+		<p class="subtitle-jumbotron">Track your catches, compete with
+			your mates and get the best fishing content online</p>
+		<hr>
+		<br>
+
+
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-left">
+				<h2 class="about-header">WHAT IS CASTAWAY</h2>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph">CASTAWAY is a web application created out of passion for fishing. We enable anglers from all around the world to keep track of their fishing successes,
+                            analyze weather conditions and compete with others.</p>
+                <p class="paragraph">If you are a passionate angler like us, then you are in the right place. </p> 
+            </div>
+		</div>
+        <br><br>
+	</div>
+    
+    	<div class="container">
+		<div class="row">
+			<div class="col text-left">
+				<h2 class="about-header">HOW IT WORKS</h2>
+			</div>
+		</div>
+	</div>
+    
+    	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph">CASTAWAY gives you a few handy features that are aimed at serving you both a pleasurable and useful experience. All of them are available for registered users. Don't want to register before you try everything out? Use the credentials below to log in to a test account:</p>
+                <ul>
+                    <li><i class="fas fa-circle"></i><strong>login:</strong><span class="credentials">testuser</span></li>
+                    <li><i class="fas fa-circle"></i><strong>password:</strong><span class="credentials">testuser</span></li>
+                </ul>
+                <p class="paragraph">Here is what you can do:</p> 
+            </div>
+		</div>
+        <br>
+	</div>
+    
+    <div class="container">
+		<div class="row">
+			<div class="col text-left" id="track-about">
+				<h4 class="about-header">TRACK YOUR CATCHES</h4>
+			</div>
+		</div>
+	</div>
+    
+        	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph-sub">Keep record of all your catches. Your mandatory input is merely the species, length, weight and date. Based on that CASTAWAY will get all the weather information for that day that you can use for future analysis. The way it works is that the application sends a request to an external weather service. The response is then trimmed to give you all you need without any irrelevant data and stored in a database.</p>
+                 
+            </div>
+		</div>
+        <br>
+	</div>
+    
+    <div class="container">
+		<div class="row">
+			<div class="col text-left" id="compete-about">
+				<h4 class="about-header">COMPETE WITH OTHERS</h4>
+			</div>
+		</div>
+	</div>
+    
+        	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph-sub">See how your fishing results compare to other users of CASTAWAY. By entering the 'Rank' page, you trigger the application's algorithm to calculate the number of points awarded to each user. The points are not stored in a database, instead they are calculated at runtime based on each species' attributes and your catches' measurements. This solution enables CASTAWAY to have the point counting algorithm beta tested by the users and have it improved based on your suggestions without affecting the existing records.</p>
+                <p class="paragraph-sub">CASTAWAY is also working on a new feature called 'Competition'. It will enable you to create your own tournament for you and your mates, which noone else will have access to. You will be able to set the ending date and parameterize the competition to your needs. It's summer and you wish to challenge your friends to a catfish battle? No problem - set the competition so that only catfish of legal size are eligible for the final rank. Stay tuned for this feature's release!</p>
+                 
+            </div>
+		</div>
+        <br>
+	</div>
+    
+        <div class="container">
+		<div class="row">
+			<div class="col text-left" id="analyze-about">
+				<h4 class="about-header">ANALYZE YOUR RECORDS</h4>
+			</div>
+		</div>
+	</div>
+    
+        	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph-sub">Each catch saved by you triggers a request to an external weather service to get all the records you need for your analysis. The weather API responds with a set of JSON records, which are then trimmed to save only the conditions valid for fishing. The way it currently works is that the requests are parameterized with Warsaw as a default location. You will soon be able to define the precise location yourself.</p>
+                 <p class="paragraph-sub">Another feature that CASTAWAY is working on is 'Stats'. As both CASTAWAY and your record sheet grows, you will be able to retrieve a statistical summary of your records. Ever wondered how the air pressure contributes to your fishing success? Well, soon enough you will be able to empirically see it for yourself. All you will have to do is choose air pressure as a parameter and you will get a nice graph of all your catches compared against it. Stay tuned for this feature's release!</p>
+                 
+            </div>
+		</div>
+        <br>
+	</div>
+    
+        	<div class="container">
+		<div class="row">
+			<div class="col text-left">
+				<h2 class="about-header">TECH STACK</h2>
+			</div>
+		</div>
+	</div>
+    
+    		
+    	<div class="container">
+
+		<div class="row">
+            <div class="col-text-left">
+                <p class="paragraph">Here is what's behind the scenes: </p>
+                    <ul>
+                        <li><i class="fas fa-dot-circle"></i>JAVA 11</li>
+                        <li><i class="fas fa-dot-circle"></i>SpringBoot</li>
+                        <li><i class="fas fa-dot-circle"></i>Spring Security</li>
+                        <li><i class="fas fa-dot-circle"></i>Hibernate</li>
+                        <li><i class="fas fa-dot-circle"></i>Jackson</li>
+                        <li><i class="fas fa-dot-circle"></i>Maven</li>
+                        <li><i class="fas fa-dot-circle"></i>Bootstrap (HTML, CSS, JavaScript)</li>
+                        <li><i class="fas fa-dot-circle"></i>OkHttp3</li>
+                        
+                
+                    </ul> 
+            </div>
+		</div>
+        <br>
+	</div>
+	
+
+	<div class=container style="margin-top: 50px;">
+		<hr class="line-break">
+	</div>
+
+	<!-- Footer -->
+	<footer class="page-footer font-small">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway-springboot"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+	</footer>
+	<!-- Footer -->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+	
+	<!-- Offset for redirecting from the welcome page to have the headers displayed too -->
+	<script type="text/javascript">
+	
+		function offsetAnchor() {
+		    if(location.hash.length !== 0) {
+		        window.scrollTo(window.scrollX, window.scrollY - 100);
+		    }
+		}
+
+		// This will capture hash changes while on the page
+		window.addEventListener("hashchange", offsetAnchor);
+
+		// This is here so that when you enter the page with a hash,
+		// it can provide the offset in that case too. Having a timeout
+		// seems necessary to allow the browser to jump to the anchor first.
+		window.setTimeout(offsetAnchor, 1); // The delay of 1 is arbitrary and may not always work right (although it did in my testing).
+		
+	</script>
+</body>
+
+
+
+</html>

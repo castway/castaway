@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>New competition</title>
+
+</head>
+
+<body>
+	<div class="container">
+		<br>
+		<h3>Start a competition</h3>
+		<hr>
+
+		<form action="#" th:action="@{/competition/save}" th:object="${competition}"
+			method="post">
+			
+			<input type="hidden" th:field="*{id}">
+			
+			<input id="name" type="text" th:field="*{name}" th:placeholder="Competition_name"
+				class="form-control mb-2 col-3"> 
+			<i class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</i>
+			
+			<input id="endDate" type="date" th:field="*{endDate}" th:placeholder="End_date"
+				class="form-control mb-2 col-3">
+			<i class="text-danger" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">date error</i>
+			
+			<br>
+			<button type="submit" class="btn btn-dark w-25">Save</button>
+
+		</form>
+		<br>
+
+		<p>
+			<a th:href="@{/catch/catchList}">Back to Catch List</a>
+		</p>
+
+	</div>
+
+</body>
+
+
+</html>

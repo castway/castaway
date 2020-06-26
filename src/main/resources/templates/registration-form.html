@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>Register</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-image: url(../images/jumbotron-background-edited.jpg);
+	background-size: cover;
+	height: 100%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.subtitle-jumbotron {
+	color: white;
+	text-align: center;
+}
+
+.registration-header {
+	margin: 50px;
+	color: #FA9A82;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+#label-username, #label-password, #label-confirm-password, #label-email
+	{
+	color: white;
+}
+    
+#checkbox{
+
+  display:inline-block;
+
+
+  position:relative;
+  cursor:pointer;
+}
+
+#ckeckbox-element{
+  display:block;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:99999;
+  opacity:0;
+}
+    
+    
+</style>
+
+</head>
+
+<body>
+
+	<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/welcome}"> <img
+			src="../images/Logo.svg" width="30"
+			height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			CASTAWAY
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" th:href="@{/welcome}">Home</a> <a
+					class="nav-item nav-link" th:href="@{/about}">About</a> <a
+					class="nav-item nav-link" th:href="@{/contact}">Contact</a> <a
+					class="nav-item nav-link" th:href="@{/login}">Login </a> <a
+					class="nav-item nav-link active" th:href="@{/user/registration}">Register
+					<span class="sr-only">(current)</span>
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<h1 class="display-4">Welcome to CASTAWAY</h1>
+		<!-- <p class="lead">We are a web service dedicated to anglers of all kind</p> -->
+		<hr class="my-4">
+		<p class="subtitle-jumbotron">Track your catches, compete with
+			your mates and get the best fishing content online</p>
+		<hr>
+		<br>
+
+
+
+	</div>
+
+	<div class="container">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<h2 class="registration-header">SIGN UP</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-4"></div>
+			</div>
+
+			<div class="row justify-content-center">
+				<div class="col-lg-4">
+
+
+					<form th:action="@{/user/registration/registerUser}" method="post"
+						th:object="${user}">
+
+						<div class="form-group">
+
+							<div th:if="${registrationErrorUsername}">
+								<div th:text="${registrationErrorUsername}"
+									class="badge badge-danger" />
+							</div>
+
+							<label id="label-username">Username</label> <input type="text"
+								id="username" th:field="*{username}"
+								placeholder="Enter username" class="form-control" maxlength="50" />
+							<i class="text-danger" th:if="${#fields.hasErrors('username')}"
+								th:errors="*{username}">username error</i>
+						</div>
+
+						<div class="form-group">
+
+							<div th:if="${registrationErrorEmail}">
+								<div th:text="${registrationErrorEmail}"
+									class="badge badge-danger" />
+							</div>
+
+							<label id="label-email">Email</label> <input type="text"
+								id="email" th:field="*{email}" placeholder="Enter email"
+								class="form-control" maxlength="50" /> <i class="text-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email
+								error</i>
+						</div>
+
+						<div class="form-group">
+							<label id="label-password">Password</label> 
+                            <div class="input-group">
+                            <input type="password" id="myInput" th:field="*{password}" placeholder="Enter password" class="form-control" maxlength="50" />
+                                        <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span id="checkbox"><input type="checkbox" id="ckeckbox-element" onclick="myFunction()"><i class="far fa-eye" id="unclicked-password"></i></span>
+                                                </div>
+                                        </div>
+                                        
+                                        
+                            </div>
+                            <i class="text-danger" th:if="${#fields.hasErrors('global')}"
+								th:errors="*{global}">password error</i>
+							<i class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password
+								error</i>	
+							
+						</div>
+
+						<div class="form-group">
+							<label id="label-confirm-password">Confirm password</label> <input
+								type="password" id="myInput2"
+								th:field="*{passwordConfirmation}" placeholder="Enter password"
+								class="form-control" maxlength="50" />
+								<i class="text-danger" th:if="${#fields.hasErrors('global')}"
+								th:errors="*{global}">password error</i>
+						</div>
+
+
+
+						<input type="submit" class="btn btn-outline-light col text-center"
+							value="Sign me up" />
+
+						<hr>
+
+						<a th:href="@{/login}"
+							class="btn btn-outline-secondary col text-center">&larr; Back
+							to login</a>
+
+					</form>
+
+					<br>
+
+
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-4"></div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+	<div class=container style="margin-top: 50px;">
+		<hr class="line-break">
+	</div>
+
+	<!-- Footer -->
+	<footer class="page-footer font-small purple pt-4">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway-springboot"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+	</footer>
+	<!-- Footer -->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  var y = document.getElementById("unclicked-password"); 
+  var z = document.getElementById("myInput2");
+    
+  if (x.type === "password") {
+    x.type = "text";
+    z.type = "text";  
+    y.className = "far fa-eye-slash";  
+  } else {
+    x.type = "password";
+    z.type = "password";
+    y.className = "far fa-eye";   
+  }
+}
+</script>
+</body>
+
+
+
+</html>

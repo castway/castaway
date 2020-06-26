@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>Your catches</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-image: url(../images/jumbotron-background-short.JPG);
+	background-size: cover;
+	height: 50%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.add-competition-header {
+	margin: 50px;
+	color: #FA9A82;
+}
+
+hr.line-break {
+	background: #94888A;
+	width: 80%;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+#button-back{
+	color: #FA9A82;
+	border-color: #FA9A82;
+	
+}
+
+#button-back:hover {
+	background-color: #FA9A82;
+	color: black;
+ 
+}  
+
+.fa-ellipsis-h {
+	font-size: 2rem;
+	color: #FA9A82;
+}
+
+</style>
+</head>
+
+<body>
+
+	<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/welcome}"> <img
+			src="../images/Logo.svg" width="30"
+			height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			CASTAWAY
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" th:href="@{/catch/catchList}">Home</a>
+				<a class="nav-item nav-link" href="#">About</a> <a
+					class="nav-item nav-link" href="#">Contact</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<hr class="my-4">
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<h2 class="add-competition-header">COMING SOON</h2>
+				<p><i class="fas fa-ellipsis-h"></i></p>
+			</div>
+		</div>
+	</div>
+
+
+	<br>
+	<br>
+
+        <div class= "container">
+    		<div class = "row">
+    			<div class = "col text-center">
+					<form th:action="@{/catch/catchList}" method="get">
+					<input type="submit" value="&larr; back to catch list" class="btn btn-outline-warning" id="button-back"/>
+				
+				</form>
+				</div>
+       	 	</div>
+    	</div>
+	
+	<div class=container style="margin-top: 50px;">
+		<hr class="line-break">
+	</div>
+
+<!-- Footer -->
+	<footer class="page-footer font-small purple pt-4">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway-springboot"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+	</footer>
+	<!-- Footer -->
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>

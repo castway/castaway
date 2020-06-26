@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>Catch details</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-image: url(../images/jumbotron-background-short.JPG);
+	background-size: cover;
+	height: 50%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.catches-header {
+	margin: 20px;
+	color: #FA9A82;
+}
+
+.column-name {
+	font-family: 'Overpass', sans-serif;
+	color: #FA9A82;
+}
+
+.fa-list-alt {
+	font-size: 1.2rem;
+	color: white;
+	vertical-align: middle;
+}
+
+.fa-pencil-alt, .fa-trash-alt {
+	margin-right: 10px;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.fa-weight {
+	margin-right: 10px;
+	font-size: 20px;
+}
+
+#button-start-competition {
+	float: right;
+	position: relative;
+	top: -40px;
+	color: #FA9A82;
+	border-color: #FA9A82;
+}
+
+#button-start-competition:hover {
+	background-color: #FA9A82;
+	color: black;
+}
+
+#button-add-catch {
+	color: #FA9A82;
+	border-color: #FA9A82;
+}
+
+#button-add-catch:hover {
+	background-color: #FA9A82;
+	color: black;
+}
+
+.table-hover {
+	background-color: #216884;
+}
+
+hr.line-break {
+	background: #94888A;
+	width: 80%;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.copyright, .footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+  
+#button-back{
+	color: #FA9A82;
+	border-color: #FA9A82;
+}
+
+#button-back:hover {
+	background-color: #FA9A82;
+	color: black;
+}
+
+#button-update, #button-delete {
+	color: #FA9A82;
+	border-color: #FA9A82;
+}
+
+#button-update:hover, #button-delete:hover {
+	background-color: #FA9A82;
+	color: black;
+} 
+
+#button-update {
+	text-align: left;
+}   
+
+#button-delete {
+	text-align: right;
+}  
+</style>
+
+
+</head>
+
+<body>
+
+	<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/welcome}"> <img
+			src="../images/Logo.svg" width="30"
+			height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			CASTAWAY
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" th:href="@{/catch/catchList}">Home</a>
+				<a class="nav-item nav-link" href="#">About</a> <a
+					class="nav-item nav-link" href="#">Contact</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<hr class="my-4">
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<h2 class="catches-header">YOUR CATCH</h2>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<br>
+	
+		
+		
+		<div class="d-flex justify-content-between">
+		<a th:href="@{showFormUpdate(catchId=${catch.id})}" class="btn btn-outline-warning" id="button-update"><i class="fas fa-pencil-alt"></i>Update</a>
+		<a th:href="@{delete(catchId=${catch.id})}" class="btn btn-outline-warning" id="button-delete"
+						onclick="if(!(confirm('Are you sure you want to delete the catch?'))) return false"><i class="far fa-trash-alt"></i>Delete</a>
+		</div>
+		<br>
+		
+		
+			<table class="table table-hover table-dark rounded-top">
+			<thead>
+				<tr>
+					<th scope="col" class="column-name w-50">PROPERTY</th>
+					<th scope="col" class="column-name w-50">VALUE</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Species</th>
+					<td th:text="${catch.species}" />
+				</tr>
+				<tr>
+					<th scope="row">Length</th>
+					<td
+						th:text="${#numbers.formatDecimal(catch.length, 0, 0, 'POINT')} + ' cm'" />
+				</tr>
+				<tr>
+					<th scope="row">Weight</th>
+					<td
+						th:text="${#numbers.formatDecimal(catch.weigth, 1, 2, 'POINT')} + ' kg'" />
+				</tr>
+				<tr>
+					<th scope="row">Date</th>
+					<td th:text="${catch.date}" />
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<h2 class="catches-header">WEATHER</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<table class="table table-hover table-dark table-striped rounded-top">
+			<thead>
+				<tr>
+					<th scope="col" class="column-name w-50">CONDITION</th>
+					<th scope="col" class="column-name w-50">VALUE</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Weather</th>
+					<td th:text="${weather.weather_state_name}" />
+				</tr>
+				<tr>
+					<th scope="row">Min temperature</th>
+					<td
+						th:text="${#numbers.formatDecimal(weather.min_temp, 0, 2, 'POINT')} + ' &#176;C'" />
+				</tr>
+				<tr>
+					<th scope="row">Max temperature</th>
+					<td
+						th:text="${#numbers.formatDecimal(weather.max_temp, 0, 2, 'POINT')}  + ' &#176;C'" />
+				</tr>
+				<tr>
+					<th scope="row">Wind direction compass</th>
+					<td th:text="${weather.wind_direction_compass}" />
+				</tr>
+				<tr>
+					<th scope="row">Wind direction degrees</th>
+					<td
+						th:text="${#numbers.formatDecimal(weather.wind_direction, 0, 2, 'POINT')} + ' &#176;'" />
+				</tr>
+				<tr>
+					<th scope="row">Wind speed</th>
+					<td
+						th:text="${#numbers.formatDecimal(weather.wind_speed, 0, 2, 'POINT')} + ' mph'" />
+				</tr>
+				<tr>
+					<th scope="row">Air pressure</th>
+					<td th:text="${weather.air_pressure} + ' hPa'" />
+				</tr>
+				<tr>
+					<th scope="row">Humidity</th>
+					<td th:text="${weather.humidity} + ' %'" />
+				</tr>
+			</tbody>
+		</table>
+
+		<br> <br>
+
+
+
+        <div class= "container">
+    <div class = "col">
+		<form th:action="@{/catch/catchList}" method="get">
+			<input type="submit" value="&larr; back to catch list"
+				class="btn btn-outline-warning" id="button-back"/>
+		</form>
+        </div>
+    </div>
+
+		<div class=container style="margin-top: 50px;">
+			<hr class="line-break">
+		</div>
+
+
+	</div>
+
+	<!-- Footer -->
+
+
+	<footer class="footer">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway-springboot"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+	</footer>
+	<!-- Footer -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>
