@@ -115,7 +115,7 @@ class CatchControllerTest {
 		Model theModel = mock(org.springframework.ui.Model.class);
 		BindingResult br = mock(BindingResult.class);
 			
-			// two catch instances with different dates:
+			// two catch instances with same dates:
 		Catch existingCatch = new Catch();
 		Catch theCatch = new Catch();
 		
@@ -214,7 +214,7 @@ class CatchControllerTest {
 	}
 	
 	@Test
-	void etRequestToShowCatchDetailsShouldReturnCatchDetailsViewUrl() {
+	void getRequestToShowCatchDetailsShouldReturnCatchDetailsViewUrl() {
 		
 		//given
 		Model theModel = mock(org.springframework.ui.Model.class);

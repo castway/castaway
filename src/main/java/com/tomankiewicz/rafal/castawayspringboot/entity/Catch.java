@@ -29,7 +29,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.tomankiewicz.rafal.castawayspringboot.species.Fish;
 import com.tomankiewicz.rafal.castawayspringboot.validation.ValidDate;
-import com.tomankiewicz.rafal.castawayspringboot.validation.ValidSpecies;
 
 @Entity
 @Table(name = "catch")
@@ -42,7 +41,7 @@ public class Catch {
 
 	@Column(name = "species")
 	@Enumerated(EnumType.STRING)
-	@ValidSpecies(message = "Choose species")
+	@NotNull(message = "Choose species")
 	private Fish species;
 
 	@Column(name = "length")
@@ -244,12 +243,15 @@ public class Catch {
 		// Calculate if theCatch is of legal length:
 		double lengthOverMinimalLength = this.getLength().subtract(minimalLength).doubleValue();
 		
-		// Retrieve theCatch weigth (for clarity in the final formula:
+		// Retrieve theCatch weight (for clarity in the final formula:
 		double weigth = this.getWeigth().doubleValue();
+		
+		//Retrieve theCatch length (for clarity in the final formula:
+		double length = this.getLength().doubleValue();
 		
 		if (lengthOverMinimalLength >= 0) {
 			
-			return (int)(lengthOverMinimalLength * pointFactor * weigth);
+			return (int)((lengthOverMinimalLength * pointFactor * weigth) + length);
 		
 		} else {
 			

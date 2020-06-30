@@ -39,22 +39,6 @@ class CatchServiceImplTest {
 	@InjectMocks
 	private CatchServiceImpl catchService;
 	
-	@Test
-	void callApiMethodShouldConvertTheDateToAFormatAcceptedByWeatherApi() {
-		
-		//given
-		Catch theCatch = new Catch();
-		theCatch.setDate(LocalDate.now());
-		
-		//when
-		String date = theCatch.formatDate();
-		Pattern correctPattern = Pattern.compile("^\\d{4}/\\d{2}/\\d{2}$");  //  YYYY/MM/DD
-		Pattern rawPattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");		 //  YYYY-MM-DD
-		
-		//then
-		assertThat(date, matchesPattern(correctPattern));
-		assertThat(LocalDate.now().toString(), matchesPattern(rawPattern));
-	}
 	
 	@Test
 	void callApiMethodShouldPerformACallToWeatherApi() throws IOException {
