@@ -22,51 +22,35 @@ public class PasswordsMatchValidator implements ConstraintValidator<PasswordFiel
 		this.firstField = constraintAnnotation.firstField();
 		this.secondField = constraintAnnotation.secondField();
 		this.message = constraintAnnotation.message();
-		logger.info(getClass().getName() + " FIRST STRING: " + firstField + " SECOND OBJECT: " + secondField + "EQUALS: " + firstField.equals(secondField));
-
+		
 	}
-
 
 
 	@Override
 	public boolean isValid(final Object value, final ConstraintValidatorContext context) {
 
 		boolean valid = true;
+		Object firstObject = null;
+		Object secondObject = null;
 		
 		try {
-			final Object firstObject = new BeanWrapperImpl(value).getPropertyValue(firstField);
-			final Object secondObject = new BeanWrapperImpl(value).getPropertyValue(secondField);
-			logger.info(getClass().getName() + " FIRST OBJECT: " + firstObject.toString() + " SECOND OBJECT: " + secondObject.toString() + " EQUALS: " + firstObject.equals(secondObject));
-		
-			logger.info("BCRYPT :" + BCrypt.checkpw(secondObject.toString(), firstObject.toString()));
-			logger.info(BCrypt.gensalt());
+
+			firstObject = new BeanWrapperImpl(value).getPropertyValue(firstField);
+			secondObject = new BeanWrapperImpl(value).getPropertyValue(secondField);
+//			logger.info(getClass().getName() + " FIRST STRING: " + firstObject.toString() + " SECOND STRING: " + secondObject.toString() + " EQUALS: " + firstObject.equals(secondObject));
+			valid = firstObject == null && secondObject == null || firstObject != null && firstObject.equals(secondObject);
+//			logger.info("Lines moved around " + valid);
+//			logger.info("BCRYPT :" + BCrypt.checkpw(secondObject.toString(), firstObject.toString()));
 			valid = firstObject == null && secondObject == null || firstObject != null && BCrypt.checkpw(secondObject.toString(), firstObject.toString());
 		}
 		catch (final Exception ignored) {
 			
 		}
-		
-		if (!valid) {
-			
-			context.buildConstraintViolationWithTemplate(message)
-					.addPropertyNode(firstField)
-					.addConstraintViolation()
-					.disableDefaultConstraintViolation();
-		}
+
+//		logger.info("VALIDATION RESULT: " + valid);
 		
 		return valid;
 			
-//			if (firstObject != null) {
-//				
-//				return firstObject.equals(secondObject);
-//				
-//			} else {
-//				
-//				return secondObject == null;
-//			}
-			
 	}
 	
-	
-
 }
