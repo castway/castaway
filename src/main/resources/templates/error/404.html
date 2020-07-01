@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<title>CASTAWAY</title>
+
+<script src="https://kit.fontawesome.com/3add6eed7c.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	background-color: black;
+	font-family: 'Overpass', sans-serif;
+}
+
+.jumbotron {
+	background-color: black;
+	background-size: cover;
+	height: 100%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.display-4 {
+	margin-top: 50px;
+	color: azure;
+	text-align: center;
+}
+
+.lead {
+	color: white;
+}
+
+.subtitle-jumbotron {
+	color: white;
+	text-align: center;
+}
+
+.card {
+	border-width: 0px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.card-body {
+	background-image: url(images/card-background.JPG);
+	background-size: cover;
+	color: white;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.features-header {
+	margin: 50px;
+	color: #FA9A82;
+}
+
+.fa-clipboard {
+	color: white;
+	size: 5x;
+}
+
+hr.line-break {
+	background: grey;
+	width: 80%;
+}
+
+.text-uppercase {
+	color: white;
+}
+
+.footer-content-text {
+	color: white;
+}
+
+.fa-github {
+	font-size: 2rem;
+}
+
+.navbar-brand {
+	color:white;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+	<div class="jumbotron">
+		<h1 class="display-4">WHOOPS, you're lost!</h1>
+		
+		<img
+			src="images/Logo-jumbotron.svg" width="70"
+			height="70" class="mx-auto d-block" alt="" loading="lazy">
+		<hr class="my-4">
+		<p class="subtitle-jumbotron">Got a little too exploratory? Go back to CASTAWAY &darr;</p>
+		<hr>
+		<br>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-light btn-lg" th:href="@{/}"
+						role="button" id="main-login-button">Back to homepage</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  <picture>
+        <source type="image/svg+xml">
+  		<img style="background:none; border:none; " src="images/logo.svg" class="img-fluid img-thumbnail" alt="...">
+    </picture>
+    -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<h2 class="features-header">KEEP EXPLORING!</h2>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Footer -->
+	<footer class="page-footer font-small">
+
+
+		<div class="container-fluid text-center">
+
+
+			<div class="row" style="height: 20px;">
+
+
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+				<div class="col-md-4 mt-md-0 mt-3">
+
+
+					<h5 class="text-uppercase">SOURCE CODE:</h5>
+					<div class="footer-content-text">
+						<p>
+							<span><a target="_blank" rel="noopener noreferrer"
+								href="https://github.com/castway/castaway"
+								style="color: white"><i class="fab fa-github"></i></a></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 mt-md-0 mt-3"></div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+	</footer>
+	<!-- Footer -->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>
