@@ -1,6 +1,7 @@
 package com.tomankiewicz.rafal.castawayspringboot.service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,35 +68,6 @@ class CatchServiceImpl implements CatchService {
 		catchDao.save(theCatch);
 	}
 
-	public Weather callApi(Catch theCatch) throws IOException {
-
-		OkHttpClient client = new OkHttpClient();
-
-		String date = theCatch.formatDate();
-		Request request = new Request.Builder().url("https://www.metaweather.com/api/location/523920/" + date).build();
-		ObjectMapper mapper = new ObjectMapper();
-		List<Weather> weatherList;
-		try (ResponseBody responseBody = client.newCall(request).execute().body()) {
-
-		/**
-		 * retrieving the list of weather objects (the weather API responds with a list
-		 * of weather measurements - for now only one exemplary measurement is needed,
-		 * so the first one from the list is retrieved
-		 **/
-
-			weatherList = mapper.readValue(responseBody.string(), new TypeReference<List<Weather>>() {
-			});
-		} catch (IOException e) {
-			
-			// will throw custom exception to notify about weather API error
-			weatherList = new ArrayList<Weather>();
-			weatherList.add(new Weather());
-		}
-		
-		return weatherList.get(0);
-
-	}
-
 	@Override
 	@Transactional
 	public void deleteWeather(Long id) {
@@ -115,6 +89,30 @@ class CatchServiceImpl implements CatchService {
 		return mapGroupedByUsers.entrySet().stream()
 										   .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
 										   .collect(Collectors.toMap(Map.Entry::getKey,  Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+	}
+
+	@Override
+	public boolean checkIfNewCatchIsBeingCreated(@Valid Catch theCatch) {
+		
+		// If catch is being created, the object retrieved from model will have id == 0
+		return theCatch.getId() == 0;
+	}
+
+	@Override
+	public boolean checkIfDateIsBeingUpdated(@Valid Catch theCatch) {
+
+		Catch existingCatch = findById(theCatch.getId());
+		LocalDate existingDate = existingCatch.getWeather().getApplicable_date();
+		
+		return !existingDate.equals(theCatch.getDate());
+	}
+
+	@Override
+	public Weather getWeatherFromExistingCatch(@Valid Catch theCatch) {
+
+		Catch existingCatch = findById(theCatch.getId());
+		
+		return existingCatch.getWeather();
 	}
 
 }

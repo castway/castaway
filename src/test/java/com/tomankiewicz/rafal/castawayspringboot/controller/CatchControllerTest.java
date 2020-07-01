@@ -22,12 +22,16 @@ import org.springframework.validation.BindingResult;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 import com.tomankiewicz.rafal.castawayspringboot.service.CatchService;
+import com.tomankiewicz.rafal.castawayspringboot.service.WeatherService;
 
 @ExtendWith(MockitoExtension.class)
 class CatchControllerTest {
 
 	@Mock
 	private CatchService catchService;
+	
+	@Mock
+	private WeatherService weatherService;
 	
 	@InjectMocks
 	private CatchController controller;
@@ -63,17 +67,16 @@ class CatchControllerTest {
 	void callToWeatherApiShouldBeSentifNewCatchIsAdded() throws IOException {
 		
 		//given
-		Model theModel = mock(org.springframework.ui.Model.class);
 		BindingResult br = mock(BindingResult.class);
 		Catch theCatch = mock(Catch.class);
 		
-		given(theCatch.getId()).willReturn(0);
+		given(catchService.checkIfNewCatchIsBeingCreated(theCatch)).willReturn(true);
 		
 		//when
 		controller.saveCatch(theCatch, br);
 		
 		//then
-		then(catchService).should().callApi(theCatch);
+		then(weatherService).should().callApi(theCatch);
 		
 	}
 	
@@ -81,30 +84,17 @@ class CatchControllerTest {
 	void callToWeatherApiShouldBeSentIfCatchDateIsUpdated() throws IOException {
 		
 		//given
-		Model theModel = mock(org.springframework.ui.Model.class);
 		BindingResult br = mock(BindingResult.class);
-			
-			// two catch instances with different dates:
-		Catch existingCatch = new Catch();
-		Catch theCatch = new Catch();
-		
-			// weather instance created for the existing catch - catchservice uses the weather's date for 
-			// evaluating if the date is being updated:
-		Weather weather = new Weather();
-		weather.setApplicable_date(LocalDate.now().minusDays(2));
-		existingCatch.setWeather(weather);
-		
-		theCatch.setDate(LocalDate.now());
-		theCatch.setId(1);
-		
-		given(catchService.findById(theCatch.getId())).willReturn(existingCatch);
+		Catch theCatch = mock(Catch.class);
+		given(catchService.checkIfNewCatchIsBeingCreated(theCatch)).willReturn(false);
+		given(catchService.checkIfDateIsBeingUpdated(theCatch)).willReturn(true);
 		
 				
 		//when
 		controller.saveCatch(theCatch, br);
 				
 		//then
-		then(catchService).should().callApi(theCatch);
+		then(weatherService).should().callApi(theCatch);
 		
 	}
 	
@@ -112,30 +102,16 @@ class CatchControllerTest {
 	void callToWeatherApiShouldNotBeSentIfCatchUpdatedButDateDoesNotChange() throws IOException {
 		
 		//given
-		Model theModel = mock(org.springframework.ui.Model.class);
 		BindingResult br = mock(BindingResult.class);
-			
-			// two catch instances with same dates:
-		Catch existingCatch = new Catch();
 		Catch theCatch = new Catch();
+		given(catchService.checkIfNewCatchIsBeingCreated(theCatch)).willReturn(false);
+		given(catchService.checkIfDateIsBeingUpdated(theCatch)).willReturn(false);
 		
-			// weather instance created for the existing catch - catchservice uses the weather's date for 
-			// evaluating if the date is being updated:
-		Weather weather = new Weather();
-		weather.setApplicable_date(LocalDate.now());
-		existingCatch.setWeather(weather);
-		
-		theCatch.setDate(LocalDate.now());
-		theCatch.setId(1);
-		
-		given(catchService.findById(theCatch.getId())).willReturn(existingCatch);
-		
-				
 		//when
 		controller.saveCatch(theCatch, br);
 				
 		//then
-		then(catchService).should(never()).callApi(theCatch);
+		then(weatherService).should(never()).callApi(theCatch);
 		
 	}
 	

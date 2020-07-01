@@ -31,12 +31,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 import com.tomankiewicz.rafal.castawayspringboot.service.CatchService;
+import com.tomankiewicz.rafal.castawayspringboot.service.WeatherService;
 
 @Controller
 @RequestMapping("/catch")
 public class CatchController {
 
 	private CatchService catchService;
+	private WeatherService weatherService;
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	// Custom data binder to allow entering digits with coma and dot as a decimal separator:
@@ -79,9 +81,10 @@ public class CatchController {
 	
 
 	@Autowired
-	public CatchController(CatchService catchService) {
+	public CatchController(CatchService catchService, WeatherService weatherService) {
 
 		this.catchService = catchService;
+		this.weatherService = weatherService;
 	}
 
 	@GetMapping("/catchList")
@@ -118,33 +121,31 @@ public class CatchController {
 
 		// (1) Check if the catch is being created. In this case id retrieved from the
 		// model would be == 0. New call to weather API is made:
+		boolean newCatchIsCreated = catchService.checkIfNewCatchIsBeingCreated(theCatch);
 
 		Weather weather = null;
-		Catch existingCatch = null;
-		
-		if (theCatch.getId() == 0) {
 
-			weather = catchService.callApi(theCatch);
+		
+		if (newCatchIsCreated) {
+
+			weather = weatherService.callApi(theCatch);
 		}
 		
 		// (2) If the catch is being updated:
 		
 		else {
 
-			existingCatch = catchService.findById(theCatch.getId());
-			LocalDate existingDate = existingCatch.getWeather().getApplicable_date();
-			logger.info(existingDate);
+			boolean dateIsUpdated = catchService.checkIfDateIsBeingUpdated(theCatch);
 			
 			// (2a) check if the date is being updated. If so, remove the catch from the existing weather and call API for new one
 			
-			if (!existingDate.equals(theCatch.getDate())) {
+			if (dateIsUpdated) {
 
-				weather = catchService.callApi(theCatch);
+				weather = weatherService.callApi(theCatch);
 				
 			} else {
 				
-				weather = existingCatch.getWeather();
-				logger.info(theCatch);
+				weather = catchService.getWeatherFromExistingCatch(theCatch);
 				
 			}
 

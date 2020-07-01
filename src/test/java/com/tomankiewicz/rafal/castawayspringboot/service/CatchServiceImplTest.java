@@ -3,8 +3,14 @@ package com.tomankiewicz.rafal.castawayspringboot.service;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.BDDMockito.then;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,6 +26,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.tomankiewicz.rafal.castawayspringboot.dao.CatchDao;
 import com.tomankiewicz.rafal.castawayspringboot.dao.WeatherDao;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
@@ -39,23 +46,7 @@ class CatchServiceImplTest {
 	@InjectMocks
 	private CatchServiceImpl catchService;
 	
-	
-	@Test
-	void callApiMethodShouldPerformACallToWeatherApi() throws IOException {
-		
-		//given
-		Catch theCatch = new Catch();
-		theCatch.setDate(LocalDate.now());
-		
-		//when
-		Weather weather = catchService.callApi(theCatch);
-		
-		//then
-		assertNotNull(weather);
-		assertNotNull(weather.getApplicable_date());    // means no exception was thrown. Exception can be thrown during a call to API
-		
-		
-	}
+
 	
 	@Test
 	void getAllCatchesSortedByUserMethodShouldSortTheGroupedMapByPointsDescending() {
@@ -86,8 +77,51 @@ class CatchServiceImplTest {
 		assertThat(map.size(), is(2));
 		assertThat(map.keySet().toArray()[0].toString(), is("joe"));
 		
-		
-
 	}
+	
+	@Test
+	void dateUpdateCheckerMethodShouldReturnTrueIfDateUpdated() {
+		
+		//given
+		Catch theCatch = new Catch();
+		LocalDate today = LocalDate.now();
+		LocalDate yesterday = today.minusDays(1);
+		theCatch.setDate(today);
+		
+		Catch existingCatch = new Catch();
+		Weather weather = new Weather();
+		weather.setApplicable_date(yesterday);
+		existingCatch.setWeather(weather);
+		
+		given(catchService.findById(theCatch.getId())).willReturn(existingCatch);
+		
+		boolean dateUpdated = catchService.checkIfDateIsBeingUpdated(theCatch);
+		
+		assertTrue(dateUpdated);
+		
+	}
+	
+	@Test
+	void dateUpdateCheckerMethodShouldReturnFalseIfDateNotUpdated() {
+		
+		//given
+		Catch theCatch = new Catch();
+		LocalDate today = LocalDate.now();
+		theCatch.setDate(today);
+		
+		Catch existingCatch = new Catch();
+		Weather weather = new Weather();
+		weather.setApplicable_date(today);
+		existingCatch.setWeather(weather);
+		
+		given(catchService.findById(theCatch.getId())).willReturn(existingCatch);
+		
+		boolean dateUpdated = catchService.checkIfDateIsBeingUpdated(theCatch);
+		
+		assertFalse(dateUpdated);
+		
+	}
+	
+	
 
 }

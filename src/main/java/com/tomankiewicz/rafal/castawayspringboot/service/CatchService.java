@@ -20,10 +20,14 @@ public interface CatchService {
 
 	void save(Catch theCatch) throws IOException;
 
-	Weather callApi(Catch theCatch) throws IOException;
-
 	void deleteWeather(Long id);
 
 	Map<String, Integer> getAllCatchesSortedByUser();
+
+	boolean checkIfNewCatchIsBeingCreated(@Valid Catch theCatch);
+
+	boolean checkIfDateIsBeingUpdated(@Valid Catch theCatch);
+
+	Weather getWeatherFromExistingCatch(@Valid Catch theCatch);
 
 }
