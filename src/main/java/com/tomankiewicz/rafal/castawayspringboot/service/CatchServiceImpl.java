@@ -1,13 +1,9 @@
 package com.tomankiewicz.rafal.castawayspringboot.service;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -16,17 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tomankiewicz.rafal.castawayspringboot.dao.CatchDao;
 import com.tomankiewicz.rafal.castawayspringboot.dao.WeatherDao;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
-import com.tomankiewicz.rafal.castawayspringboot.entity.User;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.ResponseBody;
 
 
 @Service

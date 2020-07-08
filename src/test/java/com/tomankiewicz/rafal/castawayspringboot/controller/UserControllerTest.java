@@ -1,29 +1,24 @@
 package com.tomankiewicz.rafal.castawayspringboot.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.BDDMockito.then;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.BDDMockito.never;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 
-
+import javax.mail.MessagingException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.exceptions.verification.NeverWantedButInvoked;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.User;
+import com.tomankiewicz.rafal.castawayspringboot.service.EmailService;
 import com.tomankiewicz.rafal.castawayspringboot.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,6 +26,9 @@ class UserControllerTest {
 
 	@Mock
 	private UserService userService;
+	
+	@Mock
+	private EmailService emailService;
 	
 	@InjectMocks
 	private UserController userController;
@@ -49,7 +47,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldNotTriggerSaveMethodOnServiceIfErrors() {
+	void postRequestToRegisterUserShouldNotTriggerSaveMethodOnServiceIfErrors() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -66,7 +64,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldReturnRegistrationFormIfErrors() {
+	void postRequestToRegisterUserShouldReturnRegistrationFormIfErrors() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -82,7 +80,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldNotTriggerSaveOnServiceIfUsernameExists() {
+	void postRequestToRegisterUserShouldNotTriggerSaveOnServiceIfUsernameExists() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -98,7 +96,7 @@ class UserControllerTest {
 	}
 
 	@Test
-	void postRequestToRegisterUserShouldReturnRegistrationFormIfUsernameExists() {
+	void postRequestToRegisterUserShouldReturnRegistrationFormIfUsernameExists() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -114,7 +112,7 @@ class UserControllerTest {
 	}
 
 	@Test
-	void postRequestToRegisterUserShouldNotTriggerSaveOnServiceIfEmailExists() {
+	void postRequestToRegisterUserShouldNotTriggerSaveOnServiceIfEmailExists() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -130,7 +128,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldReturnRegistrationFormIfEmailExists() {
+	void postRequestToRegisterUserShouldReturnRegistrationFormIfEmailExists() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -146,7 +144,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldTriggerSaveOnServiceIfUserDoesNotExist() {
+	void postRequestToRegisterUserShouldTriggerSaveOnServiceIfUserDoesNotExist() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -164,7 +162,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void postRequestToRegisterUserShouldReturnConfirmationIfUserDoesNotExist() {
+	void postRequestToRegisterUserShouldReturnConfirmationIfUserDoesNotExist() throws MessagingException {
 		
 		//given
 		Model theModel = mock(Model.class);
@@ -178,6 +176,23 @@ class UserControllerTest {
 		
 		//then
 		assertThat(output, containsString("registration-confirmation"));
+		
+	}
+	
+	@Test
+	void sendWelcomeEmailShouldBeInvokedAfterUserSaved() throws MessagingException {
+		
+		//given
+		Model theModel = mock(Model.class);
+		BindingResult bindinResult = mock(BindingResult.class);
+		User theUser = mock(User.class);
+		given(bindinResult.hasErrors()).willReturn(false);
+		
+		//when
+		userController.registerUser(theUser, bindinResult, theModel);
+		
+		//then
+		then(emailService).should().sendWelcomeEmail(theUser);
 		
 	}
 }

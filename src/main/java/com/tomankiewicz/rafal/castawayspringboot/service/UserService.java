@@ -1,7 +1,5 @@
 package com.tomankiewicz.rafal.castawayspringboot.service;
 
-import javax.validation.Valid;
-
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.User;

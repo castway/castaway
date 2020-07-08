@@ -3,8 +3,6 @@ package com.tomankiewicz.rafal.castawayspringboot.dao;
 import java.util.List;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
-import com.tomankiewicz.rafal.castawayspringboot.entity.User;
-import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 
 public interface CatchDao {
 

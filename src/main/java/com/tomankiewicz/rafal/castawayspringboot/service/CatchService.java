@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
-import com.tomankiewicz.rafal.castawayspringboot.entity.User;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 
 public interface CatchService {

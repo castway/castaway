@@ -3,7 +3,6 @@ package com.tomankiewicz.rafal.castawayspringboot.service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,7 +23,6 @@ public class UserServiceImpl implements UserService {
 	
 	private UserDao userRepository;
 	private AuthorityDao authorityDao;
-	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	@Autowired
 	public UserServiceImpl(UserDao userRepository, AuthorityDao authorityDao) {

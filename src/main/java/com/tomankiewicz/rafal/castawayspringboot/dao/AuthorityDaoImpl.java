@@ -3,7 +3,6 @@ package com.tomankiewicz.rafal.castawayspringboot.dao;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

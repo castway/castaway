@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
 import com.tomankiewicz.rafal.castawayspringboot.entity.User;
-import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 
 @Repository
 public class CatchDaoImpl implements CatchDao {

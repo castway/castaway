@@ -6,17 +6,14 @@ import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +36,6 @@ public class CatchController {
 
 	private CatchService catchService;
 	private WeatherService weatherService;
-	private Logger logger = Logger.getLogger(getClass().getName());
 
 	// Custom data binder to allow entering digits with coma and dot as a decimal separator:
 
