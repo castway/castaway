@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Abel&family=Overpass:wght@200&display=swap')
+	;
+
+body {
+	font-family: 'Overpass', sans-serif;
+    background-image: cid:attachment.jpg";
+}
+
+.my_content_container a {
+
+    border-radius: 3px;
+    display: block;
+    height: 1.5em;
+    padding: 0 1em;
+    width: 5em;       
+    text-decoration: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+	<div>
+	
+		<h1><span th:text="${'Hello ' + username + ' !'}"></span></h1>
+		
+		<br />
+		<p>Welcome to CASTAWAY.</p>
+		<p>Visit us to start taking advantage of all the features.</p>
+		
+		<br />
+
+
+			
+					
+		<div class="my_content_container">
+    		<a href="http://castaway-env.eba-qiairr9n.eu-central-1.elasticbeanstalk.com/">LET'S GO</a>
+		</div>
+					
+	
+	</div>
+
+</body>
+
+
+
+</html>
