@@ -11,7 +11,7 @@ import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 
 public interface CatchService {
 
-	List<Catch> getCatchList();
+	List<Catch> getCatchList(String username);
 
 	Catch findById(int id);
 

@@ -4,11 +4,15 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +45,10 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) {
 		user.setEnabled(1);
 		
-		user.setPassword(bCrypt(user.getPassword()));
+		if (user.getPassword() != null) {
+			user.setPassword(bCrypt(user.getPassword()));
+		}
+		
 		userRepository.save(user);
 		
 		authorityDao.setAuthority(user);
@@ -76,5 +83,32 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         return passwordEncoder.encode(data);
     }
+
+	@Override
+	public Authentication getAuthenticationToken() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
+
+	@Override
+	public String getUsernameOfTheLoggedInUserFromDB(Authentication auth) {
+
+		if (auth instanceof OAuth2AuthenticationToken) {
+
+			User user = getUserObjectFromDBusing(auth);
+			return user.getUsername();
+			
+		}
+		
+		return auth.getName();
+	}
+
+	public User getUserObjectFromDBusing(Authentication auth) {
+
+		OAuth2User loggedInUser = (OAuth2User) auth.getPrincipal();
+		String email = loggedInUser.getAttribute("email");
+		
+		return findByEmail(email);
+	}
+
 
 }

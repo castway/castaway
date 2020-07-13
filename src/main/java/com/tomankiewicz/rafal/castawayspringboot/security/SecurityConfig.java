@@ -50,7 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/catch/catchList")
 				.permitAll()
 			.and()
-				.logout().permitAll();
+				.logout().permitAll()
+			.and()
+				.oauth2Login()
+				.loginPage("/login")
+				.defaultSuccessUrl("/oauth2LoginSuccess");
 	}
 	
 	@Bean

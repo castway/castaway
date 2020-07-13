@@ -35,8 +35,10 @@ public class PasswordsMatchValidator implements ConstraintValidator<PasswordFiel
 
 			firstObject = new BeanWrapperImpl(value).getPropertyValue(firstField);
 			secondObject = new BeanWrapperImpl(value).getPropertyValue(secondField);
+			
 
 			valid = firstObject == null && secondObject == null || firstObject != null && firstObject.equals(secondObject);
+			// TODO delete below line:
 			valid = firstObject == null && secondObject == null || firstObject != null && BCrypt.checkpw(secondObject.toString(), firstObject.toString());
 		}
 		catch (final Exception ignored) {

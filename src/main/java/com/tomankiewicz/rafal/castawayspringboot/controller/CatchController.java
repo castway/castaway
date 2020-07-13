@@ -12,8 +12,13 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,8 +31,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
+import com.tomankiewicz.rafal.castawayspringboot.entity.User;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 import com.tomankiewicz.rafal.castawayspringboot.service.CatchService;
+import com.tomankiewicz.rafal.castawayspringboot.service.UserService;
 import com.tomankiewicz.rafal.castawayspringboot.service.WeatherService;
 
 @Controller
@@ -36,6 +43,9 @@ public class CatchController {
 
 	private CatchService catchService;
 	private WeatherService weatherService;
+	private UserService userService;
+	
+	private Logger logger= Logger.getLogger(getClass().getName());
 
 	// Custom data binder to allow entering digits with coma and dot as a decimal separator:
 
@@ -77,18 +87,29 @@ public class CatchController {
 	
 
 	@Autowired
-	public CatchController(CatchService catchService, WeatherService weatherService) {
+	public CatchController(CatchService catchService, WeatherService weatherService, UserService userService) {
 
 		this.catchService = catchService;
 		this.weatherService = weatherService;
+		this.userService = userService;
+
 	}
 
 	@GetMapping("/catchList")
 	public String getCatchList(Model theModel) {
 
-		List<Catch> catches = catchService.getCatchList();
+		Authentication auth = userService.getAuthenticationToken();
+		
+//		Long timeStart = System.currentTimeMillis();
+		
+		String username = userService.getUsernameOfTheLoggedInUserFromDB(auth);
+		
+//		Long timeStop = System.currentTimeMillis();
+		
+		List<Catch> catches = catchService.getCatchList(username);
 		theModel.addAttribute("catchList", catches);
-
+		
+//		logger.info("Checking user time: " + String.valueOf(timeStop-timeStart));
 		return "/catch/catch-list";
 	}
 
@@ -146,7 +167,16 @@ public class CatchController {
 			}
 
 		}
-
+		
+		// make sure the catch is attached to the persisted user (form based login or oauth):
+		
+		Authentication auth = userService.getAuthenticationToken();
+		
+		String username = userService.getUsernameOfTheLoggedInUserFromDB(auth);
+		
+		User existingUser = userService.findByUsername(username);
+		
+		theCatch.setUser(existingUser);
 		theCatch.setWeather(weather);
 		catchService.save(theCatch);
 

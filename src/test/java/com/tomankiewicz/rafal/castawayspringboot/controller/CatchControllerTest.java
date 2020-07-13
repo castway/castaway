@@ -16,12 +16,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
+import com.tomankiewicz.rafal.castawayspringboot.entity.User;
 import com.tomankiewicz.rafal.castawayspringboot.entity.Weather;
 import com.tomankiewicz.rafal.castawayspringboot.service.CatchService;
+import com.tomankiewicz.rafal.castawayspringboot.service.UserService;
 import com.tomankiewicz.rafal.castawayspringboot.service.WeatherService;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +38,12 @@ class CatchControllerTest {
 	
 	@Mock
 	private WeatherService weatherService;
+	
+	@Mock 
+	private UserService userService;
+	
+	@Mock
+	private Authentication auth;
 	
 	@InjectMocks
 	private CatchController controller;
@@ -48,6 +60,21 @@ class CatchControllerTest {
 		
 		//then
 		assertThat(result, containsString("catch-list"));
+	}
+	
+	@Test
+	void controllerShouldUseTheUsernameFromDBtoDisplayCatches() {
+		
+		//given
+		Model theModel = mock(org.springframework.ui.Model.class);
+		Authentication auth = mock(OAuth2AuthenticationToken.class);
+		given(userService.getAuthenticationToken()).willReturn(auth);
+	
+		//when
+		controller.getCatchList(theModel);
+		
+		//then
+		then(userService).should().getUsernameOfTheLoggedInUserFromDB(auth);
 	}
 
 	@Test
@@ -202,5 +229,22 @@ class CatchControllerTest {
 		
 		//then
 		assertThat(result, containsString("catch-details"));
+	}
+	
+	@Test
+	void controllerShouldUseUserObjectFromDBToSaveACatch() throws IOException {
+		
+		//given
+		BindingResult br = mock(BindingResult.class);
+		Catch theCatch = mock(Catch.class);
+		Authentication auth = mock(Authentication.class);
+		given(userService.getAuthenticationToken()).willReturn(auth);
+		
+		//when
+		controller.saveCatch(theCatch, br);
+		
+		//then
+		then(userService).should().getUsernameOfTheLoggedInUserFromDB(auth);
+		
 	}
 }

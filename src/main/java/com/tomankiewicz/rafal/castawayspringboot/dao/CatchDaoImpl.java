@@ -26,11 +26,9 @@ public class CatchDaoImpl implements CatchDao {
 	}
 
 	@Override
-	public List<Catch> getCatchList() {
+	public List<Catch> getCatchList(String username) {
 
 		Session session = entityManager.unwrap(Session.class);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
 
 		Query<Catch> query = session
 				.createQuery("from Catch " + "	where angler_username=:user " + "order by length DESC", Catch.class);
@@ -45,13 +43,6 @@ public class CatchDaoImpl implements CatchDao {
 		Session session = entityManager.unwrap(Session.class);
 		session.flush();
 		session.clear();
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-
-		Query<User> query = session.createQuery("from User where username=:user", User.class);
-		query.setParameter("user", username);
-		User user = query.getSingleResult();
-		theCatch.setUser(user);
 
 		session.saveOrUpdate(theCatch);
 

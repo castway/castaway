@@ -2,7 +2,7 @@
 ![castaway](src/main/resources/static/images/castaway.jpg)
 
 
-[Click here](http://castaway-env.eba-qiairr9n.eu-central-1.elasticbeanstalk.com/) to open **CASTAWAY.**
+[Click here](http://castawayapp.tech) to open **CASTAWAY.**
 
 #### WHAT IS CASTAWAY 
 CASTAWAY is a web application created out of passion for fishing. We enable anglers from all around the world to keep track of their fishing successes, analyze weather conditions and compete with others.
@@ -41,3 +41,6 @@ Here is what's behind the scenes:
 - Maven
 - Bootstrap (HTML, CSS, JavaScript)
 - OkHttp3
+- BCrypt
+- JavaMail
+- OAuth2

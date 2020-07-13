@@ -29,12 +29,12 @@ public class UserDaoImpl implements UserDao {
 		Session session = entityManager.unwrap(Session.class);
 		Query<User> query = session.createQuery("from User where username=:name", User.class);
 		query.setParameter("name", name);
-		logger.info(getClass().getName() + "QUERY CREATED");
+//		logger.info(getClass().getName() + "QUERY CREATED");
 		User user = null;
 		
 		try {
 			user = query.getSingleResult();
-			logger.info("Query for username executed");
+//			logger.info("Query for username executed");
 		}
 		catch (Exception e){
 			user = null;
@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		Session session = entityManager.unwrap(Session.class);
 		
 		session.saveOrUpdate(user);
-		logger.info(getClass().getName() + " user saved");
+//		logger.info(getClass().getName() + " user saved");
 	}
 
 	@Override
@@ -58,7 +58,18 @@ public class UserDaoImpl implements UserDao {
 		Query<User> query = session.createQuery("from User where email=:email", User.class);
 		query.setParameter("email", email);
 		
-		return query.getSingleResult();
+//		logger.info(getClass().getName() + "QUERY CREATED");
+		User user = null;
+		
+		try {
+			user = query.getSingleResult();
+//			logger.info("Query for username executed");
+		}
+		catch (Exception e){
+			user = null;
+		}
+		
+		return user;
 	}
 
 }

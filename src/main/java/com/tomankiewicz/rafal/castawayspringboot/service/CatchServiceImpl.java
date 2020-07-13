@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +36,8 @@ class CatchServiceImpl implements CatchService {
 
 	@Override
 	@Transactional
-	public List<Catch> getCatchList() {
-		return catchDao.getCatchList();
+	public List<Catch> getCatchList(String username) {
+		return catchDao.getCatchList(username);
 	}
 
 	@Override

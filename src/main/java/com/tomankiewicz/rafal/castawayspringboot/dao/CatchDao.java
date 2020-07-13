@@ -6,7 +6,7 @@ import com.tomankiewicz.rafal.castawayspringboot.entity.Catch;
 
 public interface CatchDao {
 
-	List<Catch> getCatchList();
+	List<Catch> getCatchList(String username);
 
 	Catch findById(int id);
 
