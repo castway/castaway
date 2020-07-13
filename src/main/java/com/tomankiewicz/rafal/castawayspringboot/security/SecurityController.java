@@ -86,6 +86,11 @@ public class SecurityController {
 		return "contact";
 	}
 	
+	@GetMapping("/privacy-policy")
+	public String showPrivacyPolicy() {
+		return "privacy-policy";
+	}
+	
 	@GetMapping("/oauth2LoginSuccess")
 	public String getLoginInformation(@AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken) throws MessagingException {
 		
