@@ -7,9 +7,12 @@ import javax.validation.ConstraintValidatorContext;
 
 public class DateValidator implements ConstraintValidator<ValidDate, LocalDate> {
 
-	private LocalDate today = LocalDate.now();
+	private LocalDate today;
+	
 	@Override
 	public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
+		
+		today = LocalDate.now();
 		
 		if (value == null) {
 			return false;
