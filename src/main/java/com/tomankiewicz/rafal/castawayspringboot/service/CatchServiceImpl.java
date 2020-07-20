@@ -1,6 +1,7 @@
 package com.tomankiewicz.rafal.castawayspringboot.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +106,17 @@ class CatchServiceImpl implements CatchService {
 		Catch existingCatch = findById(theCatch.getId());
 		
 		return existingCatch.getWeather();
+	}
+
+	@Override
+	@Transactional
+	public List<Catch> getCatchListSortedByDates(String username) {
+
+		List<Catch> unsortedList = getCatchList(username);
+		
+		return  unsortedList.stream()
+				 .sorted((c1, c2) -> c1.getDate().compareTo(c2.getDate()))
+				 .collect(Collectors.toList());
 	}
 
 }

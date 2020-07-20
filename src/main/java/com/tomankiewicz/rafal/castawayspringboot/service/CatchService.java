@@ -29,4 +29,6 @@ public interface CatchService {
 
 	Weather getWeatherFromExistingCatch(@Valid Catch theCatch);
 
+	List<Catch> getCatchListSortedByDates(String username);
+
 }

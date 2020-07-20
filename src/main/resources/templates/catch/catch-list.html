@@ -64,8 +64,8 @@ body {
 	vertical-align: middle;
 }
 
-.fa-award, .fa-plus-square, .fa-fish, .fa-ruler, .fa-bolt, .fa-trophy {
-	margin-right: 3px;
+.fa-chart-line, .fa-plus-square, .fa-fish, .fa-ruler, .fa-bolt, .fa-trophy {
+	
 	font-size: 20px;
 	vertical-align: middle;
 }
@@ -75,12 +75,12 @@ body {
 	font-size: 20px;
 }
 
-#button-start-competition, #button-add-catch, #button-show-rank {
+#button-show-stats, #button-add-catch, #button-show-rank {
 	color: #FA9A82;
 	border-color: #FA9A82;
 }
 
-#button-start-competition:hover, #button-add-catch:hover, #button-show-rank:hover  {
+#button-show-stats:hover, #button-add-catch:hover, #button-show-rank:hover  {
 	background-color: #FA9A82;
 	color: black;
 }
@@ -170,15 +170,14 @@ hr.line-break {
 
 		<div class="d-flex justify-content-between">
 			<a th:href="@{/catch/showFormAdd}" class="btn btn-outline-warning"
-				id="button-add-catch"><i class="far fa-plus-square"></i><span class="button-text"> Add
-				catch </span></a>
+				id="button-add-catch"><i class="far fa-plus-square"></i><span class="button-text"><b>  ADD CATCH</b></span></a>
 				
 				<a th:href="@{/catch/showRank}"
-				class="btn btn-outline-warning" id="button-show-rank"><i class="fas fa-trophy"></i><span class="button-text">Rank</span></a>
+				class="btn btn-outline-warning" id="button-show-rank"><i class="fas fa-trophy"></i><span class="button-text"><b>  RANK</b></span></a>
 				
-			<a th:href="@{/competition/showFormAdd}"
-				class="btn btn-outline-warning" id="button-start-competition"><i
-				class="fas fa-award"></i><span class="button-text">Competition</span></a>
+			<a th:href="@{/catch/chooseParams}"
+				class="btn btn-outline-warning" id="button-show-stats"><i
+				class="fas fa-chart-line"></i><span class="button-text"><b>  STATS</b></span></a>
 		</div>
 
 		<br>	
@@ -186,10 +185,10 @@ hr.line-break {
 		<table class="table table-hover table-dark rounded-top">
 			<thead>
 				<tr>
-					<th scope="col" class="column-name"><i class="fas fa-fish"></i><span class="header-text">SPECIES</span></th>
-                    <th scope="col" class="column-name"><i class="fas fa-ruler"></i><span class="header-text">LENGTH</span></th>
-                    <th scope="col" class="column-name"><i class="fas fa-weight"></i><span class="header-text">WEIGHT</span></th>
-                    <th scope="col" class="column-name"><i class="fas fa-bolt"></i><span class="header-text">ACTION</span></th>
+					<th scope="col" class="column-name"><i class="fas fa-fish"></i><span class="header-text"> SPECIES</span></th>
+                    <th scope="col" class="column-name"><i class="fas fa-ruler"></i><span class="header-text"> LENGTH</span></th>
+                    <th scope="col" class="column-name"><i class="fas fa-weight"></i><span class="header-text"> WEIGHT</span></th>
+                    <th scope="col" class="column-name"><i class="fas fa-bolt"></i><span class="header-text"> ACTION</span></th>
 				</tr>
 			</thead>
 

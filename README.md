@@ -27,7 +27,7 @@ CASTAWAY is also working on a new feature called 'Competition'. It will enable y
 * **ANALYZE YOUR RECORDS**  
 Each catch saved by you triggers a request to an external weather service to get all the records you need for your analysis. The weather API responds with a set of JSON records, which are then trimmed to save only the conditions valid for fishing. The way it currently works is that the requests are parameterized with Warsaw as a default location. You will soon be able to define the precise location yourself.
 
-Another feature that CASTAWAY is working on is 'Stats'. As both CASTAWAY and your record sheet grows, you will be able to retrieve a statistical summary of your records. Ever wondered how the air pressure contributes to your fishing success? Well, soon enough you will be able to empirically see it for yourself. All you will have to do is choose air pressure as a parameter and you will get a nice graph of all your catches compared against it. Stay tuned for this feature's release!
+Another feature that CASTAWAY has been working on and recently released is 'Stats'. As your record sheet grows, you are now able to retrieve a statistical summary of your records. Ever wondered how the air pressure contributes to your fishing success? Well, see it for yourself. All you have to do is choose air pressure as a parameter and you will get a nice graph of all your catches compared against it.
 
 
 #### TECH STACK
@@ -44,3 +44,4 @@ Here is what's behind the scenes:
 - BCrypt
 - JavaMail
 - OAuth2
+- Chart.js
