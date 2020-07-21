@@ -354,8 +354,12 @@ var chartPointSize = 5;
 
                  
                 }
-             }
-
+             },
+             legend: {
+                 onClick: function (e) {
+                     e.stopPropagation();
+            	 }
+            }
         }
     };
 
