@@ -107,12 +107,21 @@ hr.line-break {
  	display: inline-block;	
 }
 
+#buttons-title {
+	display: inline-block;
+	font-size: 0.7rem;
+	color: white;
+}
+
  @media (max-width: 575.98px) {
     #small-view-prompt {
         display: inline-block;
         color: white;
        }
      #buttons {
+     	display: none;
+     }
+     #buttons-title {
      	display: none;
      }  
     }   
@@ -158,11 +167,13 @@ hr.line-break {
 
 			<form action="#" th:action="@{/catch/analytics#buttons}"
 				th:object="${chartOptions}" method="post" id="buttons">
-				
+				<div class="row">
+					<div class="col text-center" id="buttons-title">
+						<p>CHOOSE A PARAMETER TO SEE YOUR GRAPH</p>
+					</div>
+				</div>
 				<div class="btn-group" role="group" aria-label="Basic example">
-			<!-- 	<select name="parameter" class="form-control">  -->
  					 <button th:each="chart : ${chartOptions}" th:value="${chart}" th:text="${chart.displayValue}" type="submit" name="parameter" class="btn btn-secondary"></button>
-			<!-- 	</select>   -->
 				</div>
 				
 			</form>
