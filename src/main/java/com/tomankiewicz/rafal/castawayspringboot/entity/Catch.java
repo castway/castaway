@@ -226,7 +226,7 @@ public class Catch {
 	 * 
 	 * ([CATCH_LENGTH] - [MINIMAL_SPECIES_LENGTH]) * [POINT_FACTOR] * [WEIGTH]
 	 * 
-	 * Points are awarded only if [CATCH_LENGTH] >= [CATCH_LENGTH]
+	 * Points are awarded only if [CATCH_LENGTH] >= [MINIMAL_SPECIES_LENGTH]
 	 */
 	
 	public int calculatePoints() {
