@@ -53,6 +53,12 @@ body {
 	color: #FA9A82;
 }
 
+.empty-catch-list {
+	font-size: 1.2rem;
+	margin: 20px;
+	color: #FA9A82;
+}
+
 .column-name {
 	font-family: 'Overpass', sans-serif;
 	color: #FA9A82;
@@ -215,6 +221,12 @@ hr.line-break {
 		</table>
 
 		<br> <br>
+		<div th:if = "${catchList.empty}">
+			<div class = "col text-center">
+				<h2 class="empty-catch-list">YOU HAVE NO CATCHES SAVED YET</h2>
+			</div>
+		
+		</div>
 
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="&larr; Logout"
